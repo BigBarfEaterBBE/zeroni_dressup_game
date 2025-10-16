@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://6ympfq6ih8ft"]
+[gd_scene load_steps=5 format=3 uid="uid://6ympfq6ih8ft"]
 
 [ext_resource type="Texture2D" uid="uid://cv1ps14hws1kf" path="res://thewnini/icons/thewnini_body_base.png" id="1_5duen"]
 [ext_resource type="Script" uid="uid://bngr6wo5scwga" path="res://CharacterSelect.gd" id="1_6yhuy"]
 [ext_resource type="Texture2D" uid="uid://qi57j2xanbwg" path="res://binini/icons/binini_body_base.png" id="2_6yhuy"]
+[ext_resource type="Texture2D" uid="uid://bpv8607hgefro" path="res://backgrounds/background.png" id="2_aoibv"]
 
 [node name="character_select" type="Control"]
 layout_mode = 3
@@ -10,6 +11,12 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_6yhuy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+texture = ExtResource("2_aoibv")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
