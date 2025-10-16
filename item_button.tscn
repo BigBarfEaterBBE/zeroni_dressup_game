@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc03yvlr8mm7q"]
+
+[ext_resource type="Script" uid="uid://66a4tvlrqpdc" path="res://Item_Button.gd" id="1_0241j"]
+
+[node name="TextureButton" type="TextureButton"]
+custom_minimum_size = Vector2(64, 64)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+stretch_mode = 0
+script = ExtResource("1_0241j")

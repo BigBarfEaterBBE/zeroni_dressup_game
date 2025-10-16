@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://6ympfq6ih8ft"]
+
+[ext_resource type="Texture2D" uid="uid://cv1ps14hws1kf" path="res://thewnini/icons/thewnini_body_base.png" id="1_5duen"]
+[ext_resource type="Script" uid="uid://bngr6wo5scwga" path="res://CharacterSelect.gd" id="1_6yhuy"]
+[ext_resource type="Texture2D" uid="uid://qi57j2xanbwg" path="res://binini/icons/binini_body_base.png" id="2_6yhuy"]
+
+[node name="character_select" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_6yhuy")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Thewnini" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_5duen")
+
+[node name="Binini" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_6yhuy")

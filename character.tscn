@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://fi62dsuo12hn"]
+
+[ext_resource type="Texture2D" uid="uid://clyo6igp2vycm" path="res://thewnini/thewnini_body_base.png" id="1_glpr6"]
+
+[node name="Character" type="Node2D"]
+
+[node name="Body_base" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_glpr6")
+
+[node name="Lower_body_clothes" type="Sprite2D" parent="."]
+
+[node name="Upper_body_clothes" type="Sprite2D" parent="."]
+
+[node name="Head_accessory" type="Sprite2D" parent="."]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq1vsq7bpi6ju"]
+
+[ext_resource type="Script" uid="uid://ba32qdnjvmao2" path="res://CharacterCustomizer.gd" id="1_044na"]
+[ext_resource type="PackedScene" uid="uid://fi62dsuo12hn" path="res://character.tscn" id="1_s07j3"]
+[ext_resource type="Texture2D" uid="uid://bpv8607hgefro" path="res://backgrounds/background.png" id="3_acbgj"]
+[ext_resource type="Texture2D" uid="uid://cs0xm4l1wfppl" path="res://backgrounds/side_panel.png" id="3_g0mfn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g0mfn"]
+texture = ExtResource("3_g0mfn")
+
+[node name="character_customizer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_044na")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1150, 650)
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+texture = ExtResource("3_acbgj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="sidebar_panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_g0mfn")
+
+[node name="optionlist_vbox" type="VBoxContainer" parent="HBoxContainer/sidebar_panel"]
+layout_mode = 0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 650.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/sidebar_panel/optionlist_vbox"]
+custom_minimum_size = Vector2(300, 550)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/sidebar_panel/optionlist_vbox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+columns = 2
+
+[node name="character_area" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(850, 0)
+layout_mode = 2
+
+[node name="character" parent="HBoxContainer/character_area" instance=ExtResource("1_s07j3")]
+position = Vector2(376, 336)
