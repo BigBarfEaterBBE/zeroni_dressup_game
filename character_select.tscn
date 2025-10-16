@@ -19,10 +19,10 @@ offset_bottom = 650.0
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="Thewnini" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+[node name="thewnini" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_5duen")
 
-[node name="Binini" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+[node name="binini" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("2_6yhuy")

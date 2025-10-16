@@ -22,59 +22,59 @@ const CHARACTERS = {
 const CLOTHING_OPTIONS = {
 	"Upper_body_clothes": [
 		{
-			"icon":"icons/thewnini_upper_clothes_sleep.png",
-			"full":"clothes/thewnini_upper_clothes_sleep.png"
+			"icon":"icons/{character_key}_upper_clothes_sleep.png",
+			"full":"clothes/{character_key}_upper_clothes_sleep.png"
 			
 		},
 		{
-			"icon":"icons/thewnini_upper_clothes_uniform.png",
-			"full":"clothes/thewnini_upper_clothes_uniform.png"
+			"icon":"icons/{character_key}_upper_clothes_uniform.png",
+			"full":"clothes/{character_key}_upper_clothes_uniform.png"
 		}
 	],
 	"Lower_body_clothes": [
 		{
-			"icon":"icons/thewnini_lower_clothes_apple.png",
-			"full":"clothes/thewnini_lower_clothes_apple.png"
+			"icon":"icons/{character_key}_lower_clothes_apple.png",
+			"full":"clothes/{character_key}_lower_clothes_apple.png"
 			
 		},
 		{
-			"icon":"icons/thewnini_lower_clothes_blueberry.png",
-			"full":"clothes/thewnini_lower_clothes_blueberry.png"
+			"icon":"icons/{character_key}_lower_clothes_blueberry.png",
+			"full":"clothes/{character_key}_lower_clothes_blueberry.png"
 		},
 		{
-			"icon":"icons/thewnini_lower_clothes_cherry.png",
-			"full":"clothes/thewnini_lower_clothes_cherry.png"
+			"icon":"icons/{character_key}_lower_clothes_cherry.png",
+			"full":"clothes/{character_key}_lower_clothes_cherry.png"
 		},
 		{
-			"icon":"icons/thewnini_lower_clothes_cranberry.png",
-			"full":"clothes/thewnini_lower_clothes_cranberry.png"
+			"icon":"icons/{character_key}_lower_clothes_cranberry.png",
+			"full":"clothes/{character_key}_lower_clothes_cranberry.png"
 		},
 		{
-			"icon":"icons/thewnini_lower_clothes_uniform.png",
-			"full":"clothes/thewnini_lower_clothes_uniform.png"
+			"icon":"icons/{character_key}_lower_clothes_uniform.png",
+			"full":"clothes/{character_key}_lower_clothes_uniform.png"
 		}
 	],
 	"Head_accessory": [
 		{
-			"full":"clothes/thewnini_accessory_head_apple.png",
-			"icon":"icons/thewnini_accessory_head_apple.png"
+			"full":"clothes/{character_key}_accessory_head_apple.png",
+			"icon":"icons/{character_key}_accessory_head_apple.png"
 		},
 		{
-			"full":"clothes/thewnini_accessory_head_blueberry.png",
-			"icon":"icons/thewnini_accessory_head_blueberry.png"
+			"full":"clothes/{character_key}_accessory_head_blueberry.png",
+			"icon":"icons/{character_key}_accessory_head_blueberry.png"
 			
 		},
 		{
-			"full":"clothes/thewnini_accessory_head_cherry.png",
-			"icon":"icons/thewnini_accessory_head_cherry.png"
+			"full":"clothes/{character_key}_accessory_head_cherry.png",
+			"icon":"icons/{character_key}_accessory_head_cherry.png"
 		},
 		{
-			"full":"clothes/thewnini_accessory_head_cranberry.png",
-			"icon":"icons/thewnini_accessory_head_cranberry.png"
+			"full":"clothes/{character_key}_accessory_head_cranberry.png",
+			"icon":"icons/{character_key}_accessory_head_cranberry.png"
 		},
 		{
-			"full":"clothes/thewnini_accessory_head_sleep.png",
-			"icon":"icons/thewnini_accessory_head_sleep.png"
+			"full":"clothes/{character_key}_accessory_head_sleep.png",
+			"icon":"icons/{character_key}_accessory_head_sleep.png"
 		}
 	]
 }
@@ -82,18 +82,25 @@ const CLOTHING_OPTIONS = {
 var current_selections: Dictionary = {}
 
 func _ready():
-	current_character_key = "thewnini"
 	character = get_node("HBoxContainer/character_area/character")
+
+func load_initial_character():
+	var character_data = CHARACTERS.get(current_character_key)
+	if character_data:
+		var body_texture = load(character_data.full_path)
+		character.get_node("Body_base").texture = body_texture
+	_populate_sidebar()
 	for slot_name in CLOTHING_OPTIONS.keys():
 		current_selections[slot_name] = -1
-	_populate_sidebar()
+		
 
 func get_full_texture_path(slot_name: String, item_index: int, type: String) -> String:
 	var character_data = CHARACTERS.get(current_character_key)
 	if not character_data:
 		return ""
 	var base_folder = character_data.base_path
-	var item_suffix = CLOTHING_OPTIONS[slot_name][item_index][type]
+	var item_suffix_template = CLOTHING_OPTIONS[slot_name][item_index][type]
+	var item_suffix = item_suffix_template.replace("{character_key}", current_character_key)
 	return base_folder + item_suffix
 
 func _populate_sidebar():
@@ -162,7 +169,7 @@ func _on_item_selected(slot_name:String, item_index:int):
 
 func change_item(slot_name: String, direction:int):
 	#get current index and list of options for slot
-	var current_index = current_selections.get(slot_name,0)
+	var current_index = current_selections.get(slot_name,-1)
 	var options_list = CLOTHING_OPTIONS.get(slot_name, [])
 	var options_count = options_list.size()
 	if options_count == 0:
@@ -172,7 +179,7 @@ func change_item(slot_name: String, direction:int):
 	var new_index = (current_index + direction) % options_count
 	current_selections[slot_name] = new_index
 	var item_data = options_list[new_index]
-	var texture_path = item_data.full
+	var texture_path = get_full_texture_path(slot_name, new_index, "full")
 	var new_texture: Texture2D = null
 	if texture_path != null:
 		new_texture = load(texture_path)
